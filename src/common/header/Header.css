@@ -11,7 +11,7 @@
     100% {transform: rotate(360deg);}
 }
 
-img {
+#logo-img {
     background-color: #ff7f7f;
     height: 35px;
     animation: imgAnimation 8s linear infinite;
