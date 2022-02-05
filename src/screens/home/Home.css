@@ -33,3 +33,7 @@
     border: none;
     outline: none;
 }
+
+.detail-page-link {
+    display: block;
+}

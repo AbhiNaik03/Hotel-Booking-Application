@@ -1,23 +1,7 @@
 import React, { Component } from 'react';
-import Header from '../../common/header/Header';
 import './Home.css';
-import { ImageList } from '@material-ui/core';
-import { ImageListItem } from '@material-ui/core';
-import { ImageListItemBar } from '@material-ui/core';
-import { IconButton } from '@material-ui/core';
-import { Card } from '@material-ui/core';
-import { CardActions } from '@material-ui/core';
-import { CardContent } from '@material-ui/core';
-import { Button } from '@material-ui/core';
-import { Typography } from '@material-ui/core';
-import { FormControl } from '@material-ui/core';
-import { InputLabel } from '@material-ui/core';
-import { Input } from '@material-ui/core';
-import { Select } from '@material-ui/core';
-import { MenuItem } from '@material-ui/core';
-import { Checkbox } from '@material-ui/core';
-import { ListItemText } from '@material-ui/core';
-import { TextField } from '@material-ui/core';
+import { ImageList, ImageListItem, ImageListItemBar, IconButton, Card, CardActions, CardContent, Button, Typography, FormControl, InputLabel, Input, Select, MenuItem, Checkbox, ListItemText, TextField } from '@material-ui/core';
+import Header from '../../common/header/Header';
 import genres from '../../assets/genre';
 import artists from '../../assets/artists';
 import moviesData from '../../assets/moviesData';
@@ -198,14 +182,13 @@ class Home extends Component {
         newState.moviedata = newMovieData;
         this.setState(newState);
     }
-    imageListOnClick = function(url) {
-        window.location = url;
+    imageListOnClick = (id) => {
+        window.location = window.location.href + "details/" + id;
     }
     render() {
-        
         return (
             <div>   
-                <Header />
+                <Header btnName="LOGIN"/>
 
                 <div className="heading">
                     <span>Upcoming Movies</span>
@@ -241,24 +224,28 @@ class Home extends Component {
                     <div className="left">
                         <ImageList sx={{ width: 500, height: 450 }} cols={4} rowHeight={350} id="image-list-left">
                             {this.state.moviedata.map((movie) => (
-                                <ImageListItem key={movie.id} className="left-item" onClick={() => {this.imageListOnClick(movie.wiki_url)}}>
-                                    <img
-                                        src={`${movie.poster_url}?w=248&fit=crop&auto=format`}
-                                        srcSet={`${movie.poster_url}?w=248&fit=crop&auto=format&dpr=2 2x`}
-                                        alt={movie.title}
-                                        loading="lazy"
-                                    />
-                                    <ImageListItemBar
-                                        title={movie.title}
-                                        subtitle={"Release Date: " + movie.release_date}
-                                        actionIcon={
-                                        <IconButton
-                                            sx={{ color: 'rgba(255, 255, 255, 0.54)' }}
-                                            aria-label={`info about ${movie.title}`}
-                                        >
-                                        </IconButton>
-                                        }
-                                    />
+                                <ImageListItem key={movie.id} className="left-item" 
+                                onClick={() => {this.imageListOnClick(movie.id)}}
+                                >
+                                    {/* <Link to="/detail" className="detail-page-link"> */}
+                                        <img
+                                            src={`${movie.poster_url}?w=248&fit=crop&auto=format`}
+                                            srcSet={`${movie.poster_url}?w=248&fit=crop&auto=format&dpr=2 2x`}
+                                            alt={movie.title}
+                                            loading="lazy"
+                                        />
+                                        <ImageListItemBar
+                                            title={movie.title}
+                                            subtitle={"Release Date: " + movie.release_date}
+                                            actionIcon={
+                                            <IconButton
+                                                sx={{ color: 'rgba(255, 255, 255, 0.54)' }}
+                                                aria-label={`info about ${movie.title}`}
+                                            >
+                                            </IconButton>
+                                            }
+                                        />
+                                    {/* </Link> */}
                                 </ImageListItem>
                                 ))}
                         </ImageList>
